@@ -67,8 +67,8 @@ model Pet {
   requirements       String?
   created_at         DateTime          @default(now())
 
-  ngo    Ngo?    @relation(fields: [ngo_id], references: [id])
-  ngo_id String?
+  ngo    Ngo   @relation(fields: [ngo_id], references: [id])
+  ngo_id String
 
   @@map("pets")
 }
