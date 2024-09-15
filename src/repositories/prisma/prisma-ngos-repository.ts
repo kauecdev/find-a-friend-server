@@ -23,6 +23,17 @@ export class PrismaNgosRepository implements NgosRepository {
     return ngo
   }
 
+  async findManyByCityAndState(city: string, state: string) {
+    const ngos = await prisma.ngo.findMany({
+      where: {
+        city,
+        state,
+      },
+    })
+
+    return ngos
+  }
+
   async create(data: Prisma.NgoCreateInput) {
     const ngo = await prisma.ngo.create({
       data: {

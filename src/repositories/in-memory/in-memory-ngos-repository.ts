@@ -25,6 +25,14 @@ export class InMemoryNgosRepository implements NgosRepository {
     return ngo
   }
 
+  async findManyByCityAndState(city: string, state: string) {
+    const ngos = this.items.filter(
+      item => item.city === city && item.state === state
+    )
+
+    return ngos
+  }
+
   async create(data: Prisma.NgoCreateInput) {
     const ngo = {
       id: data.id ?? randomUUID(),
