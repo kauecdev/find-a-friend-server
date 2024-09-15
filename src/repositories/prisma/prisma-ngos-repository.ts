@@ -3,6 +3,16 @@ import { prisma } from '@/lib/prisma'
 import type { NgosRepository } from '../ngos-repository'
 
 export class PrismaNgosRepository implements NgosRepository {
+  async findById(id: string) {
+    const ngo = await prisma.ngo.findUnique({
+      where: {
+        id,
+      },
+    })
+
+    return ngo
+  }
+
   async findByEmail(email: string) {
     const ngo = await prisma.ngo.findUnique({
       where: {

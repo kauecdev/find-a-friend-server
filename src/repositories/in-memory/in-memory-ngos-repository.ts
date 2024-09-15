@@ -5,6 +5,16 @@ import { randomUUID } from 'node:crypto'
 export class InMemoryNgosRepository implements NgosRepository {
   public items: Ngo[] = []
 
+  async findById(id: string) {
+    const ngo = this.items.find(item => item.id === id)
+
+    if (!ngo) {
+      return null
+    }
+
+    return ngo
+  }
+
   async findByEmail(email: string) {
     const ngo = this.items.find(item => item.email === email)
 
@@ -17,7 +27,7 @@ export class InMemoryNgosRepository implements NgosRepository {
 
   async create(data: Prisma.NgoCreateInput) {
     const ngo = {
-      id: randomUUID(),
+      id: data.id ?? randomUUID(),
       name: data.name,
       director_name: data.director_name,
       email: data.email,
